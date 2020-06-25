@@ -1,0 +1,167 @@
+*,
+*::before,
+*::after {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: Domine;
+	src: url("../resources/fonts/Domine-Regular.ttf");
+}
+
+@font-face {
+	font-family: DomineBold;
+	src: url("../resources/fonts/Domine-Bold.ttf");
+}
+
+body {
+	font-family: Domine;
+	color: #090909;
+}
+
+.container {
+	background: #fefcfb;
+}
+
+header {
+	background: #156066;
+	width: 100%;
+}
+
+nav {
+	min-height: 10vh;
+	width: 90%;
+	margin: auto;
+	color: #fefcfb;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+ul {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	width: 50%;
+	max-width: 500px;
+	min-width: 300px;
+	margin-right: 0px;
+}
+
+a {
+	color: #fefcfb;
+	text-decoration: none;
+}
+
+section {
+	min-height: 90vh;
+	width: 90%;
+	margin: auto;
+}
+
+.intro {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+h3 {
+	font-family: DomineBold;
+	font-size: 30px;
+}
+
+h2 {
+	font-family: DomineBold;
+	font-size: 64px;
+}
+
+h1 {
+	font-family: DomineBold;
+	font-size: 72px;
+}
+
+button {
+	background: #156066;
+	color: #fefcfb;
+	font-family: inherit;
+	font-size: 20px;
+	text-transform: uppercase;
+	padding: 22px;
+	width: 180px;
+	border-radius: 25% / 50%;
+	border: #fefcfb;
+	cursor: pointer;
+}
+
+button:focus {
+	outline: none;
+}
+
+.title {
+	text-align: center;
+	padding: 10vh 0 5vh;
+}
+
+.content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.project {
+	position: relative;
+	width: 465px;
+	height: 465px;
+}
+
+.overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: #156066;
+	opacity: 0.75;
+	top: 0%;
+	left: 0%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+p.name {
+	font-family: DomineBold;
+	font-size: 24px;
+}
+
+p.description {
+	font-family: Domine;
+	font-size: 24px;
+}
+
+p.name,
+p.description {
+	color: #090909;
+	text-align: center;
+	padding: 10px 0;
+	color: #fefcfb;
+}
+
+.skill {
+	width: 465px;
+	height: 465px;
+	background: #156066;
+}
+
+.skill > img {
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin: auto;
+}
+
+.skill > .description {
+	padding: 50px 0 0;
+	width: 80%;
+	margin: auto;
+}
