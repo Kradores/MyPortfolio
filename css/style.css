@@ -83,25 +83,34 @@ ul > li {
 	align-self: center;
 }
 
-li.active a::after {
+li a::after {
 	content: "";
 	border-bottom: solid 2px var(--white);
 	position: absolute;
 	width: 100%;
-	left: 0%;
 	bottom: 0%;
+	left: 0%;
+}
+
+li.active a::after {
 	animation-name: menu-item-activate;
 	animation-duration: 0.5s;
 }
 
 li.active-reverse a::after {
-	content: "";
-	border-bottom: solid 2px var(--white);
-	position: absolute;
-	width: 100%;
-	left: 0%;
-	bottom: 0%;
 	animation-name: menu-item-activate-reverse;
+	animation-duration: 0.5s;
+}
+
+li.deactivate a::after {
+	left: 100%;
+	animation-name: menu-item-deactivate;
+	animation-duration: 0.5s;
+}
+
+li.deactivate-reverse a::after {
+	left: -100%;
+	animation-name: menu-item-deactivate-reverse;
 	animation-duration: 0.5s;
 }
 
@@ -115,6 +124,24 @@ li.active-reverse a::after {
 }
 
 @keyframes menu-item-activate-reverse {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes menu-item-deactivate {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes menu-item-deactivate-reverse {
 	from {
 		transform: translateX(100%);
 	}
@@ -138,10 +165,6 @@ a {
 
 a:hover {
 	font-size: 110%;
-}
-
-main {
-	/* padding-top: 10vh; */
 }
 
 section {

@@ -18,16 +18,16 @@ for (const navItemKey in navItems) {
 					navItems[itemKey].classList.contains("active-reverse")) &&
 				navItemKey > itemKey
 			) {
-				navItem.classList.add("active");
-				navItems[itemKey].classList = "";
+				navItem.classList = "active";
+				navItems[itemKey].classList = "deactivate";
 			} else if (
 				navItems[itemKey].classList !== undefined &&
 				(navItems[itemKey].classList.contains("active") ||
 					navItems[itemKey].classList.contains("active-reverse")) &&
 				navItemKey < itemKey
 			) {
-				navItem.classList.add("active-reverse");
-				navItems[itemKey].classList = "";
+				navItem.classList = "active-reverse";
+				navItems[itemKey].classList = "deactivate-reverse";
 			}
 		}
 	});
