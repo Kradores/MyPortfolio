@@ -22,8 +22,17 @@
 	src: url("../resources/fonts/Domine-Bold.ttf");
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	color: var(--black);
+	font-size: 20px;
+}
+
+button {
+	font: unset;
 }
 
 .container {
@@ -33,36 +42,111 @@ body {
 header {
 	background: var(--ming);
 	width: 100%;
+	z-index: 10;
+	border-bottom: solid 1px var(--white);
+}
+
+.sticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
 nav {
-	min-height: 10vh;
+	height: 10vh;
 	width: 90%;
 	margin: auto;
-	color: var(--white);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
 ul {
-	display: flex;
-	justify-content: space-between;
 	list-style: none;
 	width: 50%;
-	max-width: 500px;
-	min-width: 300px;
+	max-width: 600px;
+	min-width: 405px;
 	margin-right: 0px;
+	font-size: 16px;
+}
+
+.nav-items {
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+}
+
+ul > li {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	align-self: center;
+}
+
+li.active a::after {
+	content: "";
+	border-bottom: solid 2px var(--white);
+	position: absolute;
+	width: 100%;
+	left: 0%;
+	bottom: 0%;
+	animation-name: menu-item-activate;
+	animation-duration: 0.5s;
+}
+
+li.active-reverse a::after {
+	content: "";
+	border-bottom: solid 2px var(--white);
+	position: absolute;
+	width: 100%;
+	left: 0%;
+	bottom: 0%;
+	animation-name: menu-item-activate-reverse;
+	animation-duration: 0.5s;
+}
+
+@keyframes menu-item-activate {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes menu-item-activate-reverse {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+.logo {
+	color: var(--white);
 }
 
 a {
+	position: relative;
 	font-family: Domine;
 	color: var(--white);
 	text-decoration: none;
+	transition: font-size 0.3s;
+	overflow: hidden;
+}
+
+a:hover {
+	font-size: 110%;
+}
+
+main {
+	/* padding-top: 10vh; */
 }
 
 section {
 	min-height: 90vh;
+	padding-top: 10vh;
 	width: 90%;
 	margin: auto;
 }
@@ -94,20 +178,28 @@ p {
 }
 
 .button {
-	--button-width: 180px;
+	--button-width: 200px;
 	background: var(--ming);
 	color: var(--white);
 	font-family: Domine;
-	font-size: 20px;
 	text-transform: uppercase;
 	display: inline-block;
 	text-align: center;
 	padding: 22px;
-	/* height: 67px; */
+	height: 67px;
 	width: var(--button-width);
 	border-radius: calc(var(--button-width) / 4) / 50%;
 	border: var(--white);
 	cursor: pointer;
+	transition: box-shadow 0.3s, font-size 0.3s;
+}
+
+.button:hover {
+	box-shadow: 0px 0px 5px 2px rgba(9, 9, 9, 0.75);
+}
+
+.button:active {
+	box-shadow: inset 0px 0px 3px 1px rgba(9, 9, 9, 0.75);
 }
 
 .button:focus {
@@ -122,13 +214,13 @@ p {
 .content {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 }
 
 .project {
 	position: relative;
 	width: 465px;
 	height: 465px;
+	overflow: hidden;
 }
 
 .overlay {
@@ -142,6 +234,21 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	pointer-events: none;
+	transform: translateX(-100%);
+	transition: all 0.5s ease-in-out;
+}
+
+.project-link {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+}
+
+.project:hover > .overlay {
+	transform: translateX(0%);
 }
 
 p.name {
@@ -157,9 +264,12 @@ p.description {
 }
 
 .skill {
+	position: relative;
 	width: 465px;
-	height: 465px;
+	height: 275px;
 	background: var(--ming);
+	overflow: hidden;
+	transition: all 0.5s ease-in-out;
 }
 
 .skill > img {
@@ -170,9 +280,20 @@ p.description {
 }
 
 .skill > .description {
-	padding: 50px 0 0;
-	width: 80%;
-	margin: auto;
+	padding: 11%;
+	position: absolute;
+	width: 100%;
+	pointer-events: none;
+	transform: translateY(100%);
+	transition: all 0.5s ease-in-out;
+}
+
+.skill:hover {
+	height: 400px;
+}
+
+.skill:hover > .description {
+	transform: translateY(0%);
 }
 
 .send-message {
@@ -182,9 +303,7 @@ p.description {
 
 .send-message > form {
 	display: grid;
-	grid-template-rows: repeat(1fr, 5);
 	row-gap: 24px;
-	font-size: 24px;
 }
 
 input,
@@ -207,35 +326,58 @@ textarea {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 665.5px;
+	height: 605.5px;
 	padding-bottom: calc(67px + 24px);
 }
 
 .contact {
 	--svg-size: 120px;
 	height: var(--svg-size);
+	min-width: var(--svg-size);
 	border-radius: calc(var(--svg-size) / 2) / 50%;
+	position: relative;
 	border-width: 1px;
 	border-color: var(--ming);
 	border-style: solid;
 	display: flex;
 	align-items: center;
+	overflow: hidden;
+	width: var(--svg-size);
+	margin: auto;
+	transition: width 0.5s ease-in-out;
+}
+
+.contact:hover {
+	width: 100%;
+}
+
+.contact:hover svg > .svg-background {
+	fill: var(--white);
+}
+
+.contact:hover svg {
+	fill: var(--ming);
 }
 
 .contact > .info {
 	text-align: center;
-	flex-grow: 100;
+	white-space: nowrap;
 	color: var(--ming);
+	position: absolute;
+	right: 0%;
+	width: calc(100% - var(--svg-size));
 }
 
 .contact > .social-media,
 .contact > .social-media > img {
-	height: inherit;
+	height: 100%;
 }
 
 .contact > .social-media {
 	display: flex;
-	flex-grow: 100;
+	position: absolute;
+	right: 0%;
+	width: calc(100% - var(--svg-size));
 }
 
 .contact > .social-media > img {
@@ -244,6 +386,15 @@ textarea {
 
 .contact > svg {
 	border-radius: 50%;
+}
+
+svg > .svg-background {
+	fill: var(--ming);
+	transition: fill 0.2s ease-in;
+}
+svg {
+	fill: var(--white);
+	transition: fill 0.2s ease-in;
 }
 
 footer {
@@ -260,7 +411,6 @@ footer {
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	color: var(--white);
-	font-size: 40px;
 }
 
 .footer > .made-by {
@@ -268,6 +418,7 @@ footer {
 	color: inherit;
 	font-family: DomineBold;
 	margin: auto 0;
+	font-size: 40px;
 }
 
 .footer > a {
@@ -285,4 +436,8 @@ footer {
 	color: inherit;
 	margin: auto 0 auto auto;
 	text-align: right;
+	font-size: 40px;
 }
+
+/* @media width 1600px */
+/* @media width 640px */
