@@ -87,31 +87,34 @@ li a::after {
 	content: "";
 	border-bottom: solid 2px var(--white);
 	position: absolute;
-	width: 100%;
 	bottom: 0%;
 	left: 0%;
 }
 
 li.active a::after {
+	width: 100%;
 	animation-name: menu-item-activate;
-	animation-duration: 0.5s;
+	animation-duration: 0.2s;
 }
 
 li.active-reverse a::after {
+	width: 100%;
 	animation-name: menu-item-activate-reverse;
-	animation-duration: 0.5s;
+	animation-duration: 0.2s;
 }
 
 li.deactivate a::after {
+	width: 100%;
 	left: 100%;
 	animation-name: menu-item-deactivate;
-	animation-duration: 0.5s;
+	animation-duration: 0.2s;
 }
 
 li.deactivate-reverse a::after {
+	width: 100%;
 	left: -100%;
 	animation-name: menu-item-deactivate-reverse;
-	animation-duration: 0.5s;
+	animation-duration: 0.2s;
 }
 
 @keyframes menu-item-activate {
