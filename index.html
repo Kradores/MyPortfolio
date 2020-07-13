@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./css/style.css" />
 		<script defer src="./js/main.js"></script>
+		<script defer src="./js/sendEmail.js"></script>
 		<title>Portfolio</title>
 	</head>
 	<body>
@@ -101,7 +102,7 @@
 						<div class="send-message">
 							<form action="./mail/sendEmail.php" method="post">
 								<input name="name" type="text" placeholder="Your Name" />
-								<input name="email" type="text" placeholder="Your Email" />
+								<input name="email" type="email" placeholder="Your Email" />
 								<input name="subject" type="text" placeholder="Subject" />
 								<textarea
 									name="message"

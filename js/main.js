@@ -30,7 +30,9 @@ function prepareNavItems() {
 const animateNavbar = new navbarAnmation();
 
 window.addEventListener("scroll", function () {
-	animateNavbar();
+	setTimeout(function () {
+		animateNavbar();
+	}, 1000 / 60); // 60 fps
 });
 
 function navbarAnmation() {
@@ -72,34 +74,4 @@ function navbarAnmation() {
 
 		scrollPos = document.body.getBoundingClientRect().top;
 	};
-}
-
-function xhrRequest(url, type = "GET", data = null, onSuccessCallback, onErrorCallback) {
-	const xhr = new XMLHttpRequest();
-	xhr.addEventListener("load", onSuccessCallback);
-	xhr.addEventListener("error", onErrorCallback);
-	xhr.open(type, url);
-	xhr.send(data);
-}
-
-function animateSendButton() {
-	console.log(this.responseText);
-}
-
-function showError() {
-	console.error(this);
-}
-
-const sendEmailButton = document.querySelector("div.send-message form a.button");
-sendEmailButton.addEventListener("click", sendEmail);
-
-function sendEmail() {
-	const sendEmailForm = this.parentElement;
-	xhrRequest(
-		sendEmailForm.action,
-		sendEmailForm.method,
-		new FormData(sendEmailForm),
-		animateSendButton,
-		showError
-	);
 }

@@ -4,15 +4,27 @@ require_once("Configuration.php");
 
 set_time_limit(10);
 
+foreach ($_POST as $key => $value) {
+    if (!$value) {
+        echo json_encode([
+            "message" => "error",
+            "description" => "$key is required",
+            "type" => "required",
+            "field" => $key
+        ]);
+        exit;
+    }
+}
+
 $message = "MyPortfolio" . "\n\n" .
     "From: " . $_POST['name'] . "\n" .
     "Email: " . $_POST['email'] . "\n\n" .
     "Message:\n" . $_POST['message'];
 
 if (smtp_mail(Configuration::EMAIL, $_POST['subject'], $message, "Reply-To: " . $_POST['email'])) {
-    echo json_encode(["Message" => "Email Sent Successfuly"]);
+    echo json_encode(["message" => "success"]);
 } else {
-    echo json_encode(["Message" => "Could not send email, please try again later!"]);
+    echo json_encode(["message" => "Could not send email, please try again later!"]);
 }
 
 function smtp_mail($to, $subject, $message, $headers = '')
@@ -24,7 +36,7 @@ function smtp_mail($to, $subject, $message, $headers = '')
     $smtp_port = Configuration::SMTP_PORT;
 
     if (!($socket = fsockopen($smtp_host, $smtp_port, $errno, $errstr, 15))) {
-        echo json_encode(["Message" => "Error connecting to '$smtp_host' ($errno) ($errstr)"]);
+        echo json_encode(["message" => "Error connecting to '$smtp_host' ($errno) ($errstr)"]);
     }
     server_parse($socket, '220');
     fwrite($socket, 'EHLO localhost' . "\r\n");
@@ -72,12 +84,12 @@ function server_parse($socket, $expected_response)
         if (!($server_response = fgets($socket, 256))) {
             $counter++;
             if ($counter % 100 == 0) {
-                echo json_encode(["Message" => "Error fetching response from server $expected_response"]);
+                echo json_encode(["message" => "Error fetching response from server $expected_response"]);
                 sleep(1);
             }
         }
     }
     if (!(substr($server_response, 0, 3) == $expected_response)) {
-        echo json_encode(["Message" => 'Unable to send e-mail."' . $server_response . '"' . " $expected_response"]);
+        echo json_encode(["message" => 'Unable to send e-mail."' . $server_response . '"' . " $expected_response"]);
     }
 }
