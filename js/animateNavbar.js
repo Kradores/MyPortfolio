@@ -39,17 +39,18 @@ function navbarAnmation() {
 	var scrollPos = 0;
 	const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 	const scrollAnimationElements = prepareNavItems();
-
+	console.log(viewportHeight);
 	return function animate() {
 		scrollAnimationElements.getBounds();
+		console.log(scrollAnimationElements[1].bounds.bottom);
 		for (const key in scrollAnimationElements) {
 			if (isNaN(key)) {
 				continue;
 			}
 
 			if (
-				scrollAnimationElements[key].bounds.bottom > viewportHeight * 0.6 &&
-				scrollAnimationElements[key].bounds.bottom < viewportHeight * 1.4
+				scrollAnimationElements[key].bounds.top < viewportHeight * 0.2 &&
+				scrollAnimationElements[key].bounds.bottom > viewportHeight * 0.8
 			) {
 				if (
 					scrollAnimationElements[key].navItem.classList.contains("active") ||
