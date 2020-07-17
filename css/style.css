@@ -59,7 +59,6 @@ nav {
 	margin: auto;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 }
 
 ul {
@@ -156,6 +155,7 @@ li.deactivate-reverse a::after {
 
 .logo {
 	color: var(--white);
+	align-self: center;
 }
 
 a {
@@ -590,6 +590,131 @@ footer {
 
 	.footer > p {
 		font-size: 32px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.hamburger {
+		position: absolute;
+		cursor: pointer;
+		top: 50%;
+		right: 5%;
+		transform: translate(-5%, -50%);
+		z-index: 1;
+	}
+
+	.line {
+		width: 30px;
+		height: 3px;
+		margin: 5px;
+		background-color: var(--white);
+	}
+
+	ul {
+		list-style: none;
+		width: 50%;
+		min-width: 250px;
+		font-size: 16px;
+	}
+
+	.nav-items {
+		position: fixed;
+		background-color: var(--ming);
+		right: -100%;
+		flex-direction: column;
+		justify-content: center;
+		transition: right 0.5s ease-in-out;
+		pointer-events: none;
+		overflow: hidden;
+	}
+
+	.nav-items.open {
+		right: 0%;
+	}
+
+	ul > li {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		padding: 70px;
+		align-self: center;
+		pointer-events: all;
+	}
+
+	li a::after {
+		content: "";
+		border-bottom: solid 2px var(--white);
+		position: absolute;
+		bottom: 0%;
+		left: 0%;
+	}
+
+	li.active a::after {
+		width: 100%;
+		height: 100%;
+		animation-name: menu-item-activate;
+		animation-duration: 0.2s;
+	}
+
+	li.active-reverse a::after {
+		width: 100%;
+		height: 100%;
+		animation-name: menu-item-activate-reverse;
+		animation-duration: 0.2s;
+	}
+
+	li.deactivate a::after {
+		width: 100%;
+		height: 100%;
+		bottom: 100%;
+		left: 0%;
+		animation-name: menu-item-deactivate;
+		animation-duration: 0.2s;
+	}
+
+	li.deactivate-reverse a::after {
+		width: 100%;
+		height: 100%;
+		bottom: -100%;
+		left: 0%;
+		animation-name: menu-item-deactivate-reverse;
+		animation-duration: 0.2s;
+	}
+
+	@keyframes menu-item-activate {
+		from {
+			transform: translateY(-100%);
+		}
+		to {
+			transform: translateY(0%);
+		}
+	}
+
+	@keyframes menu-item-activate-reverse {
+		from {
+			transform: translateY(100%);
+		}
+		to {
+			transform: translateY(0%);
+		}
+	}
+
+	@keyframes menu-item-deactivate {
+		from {
+			transform: translateY(-100%);
+		}
+		to {
+			transform: translateY(0%);
+		}
+	}
+
+	@keyframes menu-item-deactivate-reverse {
+		from {
+			transform: translateY(100%);
+		}
+		to {
+			transform: translateY(0%);
+		}
 	}
 }
 
